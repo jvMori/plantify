@@ -10,6 +10,7 @@ class BaseInput extends StatelessWidget {
   final Function onChanged;
   final bool hasError;
   final String errorText;
+  final TextInputType keyboardType;
 
   const BaseInput(
       {Key key,
@@ -17,7 +18,7 @@ class BaseInput extends StatelessWidget {
       this.controller,
       this.onChanged,
       this.hasError,
-      this.errorText})
+      this.errorText, this.keyboardType})
       : super(key: key);
 
   @override
@@ -29,6 +30,7 @@ class BaseInput extends StatelessWidget {
         TextFormField(
           controller: controller,
           onChanged: onChanged,
+          keyboardType: keyboardType ?? TextInputType.text,
           style: TextStyle(
             color: _hasError ? Colors.redAccent : darkColor,
             fontSize: 18.sp,

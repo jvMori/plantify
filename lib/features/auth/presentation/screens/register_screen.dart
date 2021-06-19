@@ -9,7 +9,21 @@ import 'package:plantify/features/auth/presentation/bloc/text_input_cubit.dart';
 import 'package:plantify/features/auth/presentation/widgets/text_input.dart';
 
 class RegisterScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  final textValidator = MultiValidator(
+    [
+      RequiredValidator(errorText: 'This field is required.'),
+      MinLengthValidator(2,
+          errorText: 'Name must be at least 2 characters long.'),
+      PatternValidator(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+          errorText: 'Name must contain only alphabetical characters.')
+    ],
+  );
+  final emailValidator = MultiValidator(
+    [
+      RequiredValidator(errorText: 'This field is required.'),
+      EmailValidator(errorText: 'Please provide correct email address.')
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +79,33 @@ class RegisterScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     BlocProvider(
-                      create: (_) => TextInputCubit(),
+                      create: (_) => TextInputCubit(textValidator),
                       child: TextInput(
                         hintText: 'First name',
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    BlocProvider(
+                      create: (_) => TextInputCubit(textValidator),
+                      child: TextInput(
+                        hintText: 'Last name',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    BlocProvider(
+                      create: (_) => TextInputCubit(emailValidator),
+                      child: TextInput(
+                        hintText: 'Email',
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 100.h,
+                    ),
                   ],
                 ))
               ],

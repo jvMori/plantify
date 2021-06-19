@@ -6,8 +6,9 @@ import 'package:plantify/features/auth/presentation/bloc/text_input_cubit.dart';
 class TextInput extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
+  final TextInputType keyboardType;
 
-  const TextInput({Key key, this.hintText, this.controller}) : super(key: key);
+  const TextInput({Key key, this.hintText, this.controller, this.keyboardType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class TextInput extends StatelessWidget {
       return BaseInput(
         hintText: hintText,
         controller: controller,
+        keyboardType: keyboardType,
         hasError: state is TextInputError,
         errorText: state is TextInputError ? state.text : "",
         onChanged: cubit.validate,
