@@ -11,6 +11,9 @@ class BaseInput extends StatelessWidget {
   final bool hasError;
   final String errorText;
   final TextInputType keyboardType;
+  final bool obscureText;
+  final Widget suffixIcon;
+  final TextInputAction textInputAction;
 
   const BaseInput(
       {Key key,
@@ -18,7 +21,10 @@ class BaseInput extends StatelessWidget {
       this.controller,
       this.onChanged,
       this.hasError,
-      this.errorText, this.keyboardType})
+      this.errorText,
+      this.keyboardType,
+      this.obscureText,
+      this.suffixIcon, this.textInputAction})
       : super(key: key);
 
   @override
@@ -30,12 +36,15 @@ class BaseInput extends StatelessWidget {
         TextFormField(
           controller: controller,
           onChanged: onChanged,
+          obscureText: obscureText ?? false,
           keyboardType: keyboardType ?? TextInputType.text,
+          textInputAction: textInputAction ?? TextInputAction.next,
           style: TextStyle(
             color: _hasError ? Colors.redAccent : darkColor,
             fontSize: 18.sp,
           ),
           decoration: InputDecoration(
+            suffixIcon: suffixIcon,
             contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
             filled: true,
             fillColor: white,
@@ -43,17 +52,23 @@ class BaseInput extends StatelessWidget {
             hintStyle: TextStyle(color: _hasError ? Colors.redAccent : gray),
             focusedBorder: OutlineInputBorder(
               gapPadding: 0.0,
-              borderSide: _hasError ? BorderSide(color: Colors.redAccent) : BorderSide.none,
+              borderSide: _hasError
+                  ? BorderSide(color: Colors.redAccent)
+                  : BorderSide.none,
               borderRadius: BorderRadius.circular(5.w),
             ),
             enabledBorder: OutlineInputBorder(
               gapPadding: 0.0,
-              borderSide: _hasError ? BorderSide(color: Colors.redAccent) : BorderSide.none,
+              borderSide: _hasError
+                  ? BorderSide(color: Colors.redAccent)
+                  : BorderSide.none,
               borderRadius: BorderRadius.circular(5.w),
             ),
             border: OutlineInputBorder(
               gapPadding: 0.0,
-              borderSide: _hasError ? BorderSide(color: Colors.redAccent) : BorderSide.none,
+              borderSide: _hasError
+                  ? BorderSide(color: Colors.redAccent)
+                  : BorderSide.none,
               borderRadius: BorderRadius.circular(5.w),
             ),
           ),

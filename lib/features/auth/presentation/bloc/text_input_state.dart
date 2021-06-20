@@ -5,6 +5,8 @@ abstract class TextInputState extends Equatable {
 }
 
 class TextInputInitial extends TextInputState {
+  TextInputInitial();
+
   @override
   List<Object> get props => [];
 }

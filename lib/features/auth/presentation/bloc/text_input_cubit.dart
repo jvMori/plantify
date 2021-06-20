@@ -6,12 +6,13 @@ part 'text_input_state.dart';
 
 class TextInputCubit extends Cubit<TextInputState> {
   TextInputCubit(this.nameValidator) : super(TextInputInitial());
-  final MultiValidator nameValidator;
+  final FieldValidator nameValidator;
+  String _errorText = "";
 
   validate(String value) {
-    String errorText = nameValidator.call(value);
-    if (errorText != null) {
-      emit(TextInputError(errorText));
+    _errorText = nameValidator.call(value);
+    if (_errorText != null) {
+      emit(TextInputError(_errorText));
     } else
       emit(TextInputInitial());
   }

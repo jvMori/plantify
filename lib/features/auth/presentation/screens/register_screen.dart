@@ -5,8 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:plantify/common/base_input.dart';
 import 'package:plantify/common/colors.dart';
+import 'package:plantify/common/validation/password_validator.dart';
 import 'package:plantify/features/auth/presentation/bloc/text_input_cubit.dart';
+import 'package:plantify/features/auth/presentation/bloc/toggle_password_visibility_cubit.dart';
+import 'package:plantify/features/auth/presentation/widgets/password_input.dart';
 import 'package:plantify/features/auth/presentation/widgets/text_input.dart';
+import 'package:plantify/features/auth/presentation/widgets/toggle_password_visibility.dart';
 
 class RegisterScreen extends StatelessWidget {
   final textValidator = MultiValidator(
@@ -24,6 +28,8 @@ class RegisterScreen extends StatelessWidget {
       EmailValidator(errorText: 'Please provide correct email address.')
     ],
   );
+
+  final passwordValidator = PasswordValidator();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,10 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 360.h,
+                  height: 110.h,
+                ),
+                SizedBox(
+                  height: 120.h,
                   child: Image.asset(
                     "assets/images/logo.png",
                     fit: BoxFit.fitHeight,
@@ -104,7 +113,23 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 100.h,
+                      height: 20.h,
+                    ),
+                    MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (_) => TextInputCubit(passwordValidator),
+                        ),
+                        BlocProvider(
+                          create: (_) => TogglePasswordVisibilityCubit(),
+                        ),
+                      ],
+                      child: PasswordInput(
+                        textInputAction: TextInputAction.done,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 80.h,
                     ),
                   ],
                 ))
