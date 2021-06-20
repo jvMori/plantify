@@ -8,7 +8,7 @@ class PasswordValidator extends TextFieldValidator with ValidationMixin {
       : super(errorText);
 
   @override
-  bool isValid(String value) {
+  bool isValid(String? value) {
     return validatePassword(value);
   }
 }

@@ -6,15 +6,15 @@ import 'package:plantify/features/auth/presentation/bloc/toggle_password_visibil
 import 'package:plantify/features/auth/presentation/widgets/toggle_password_visibility.dart';
 
 class TextInput extends StatelessWidget {
-  final String hintText;
-  final TextEditingController controller;
-  final TextInputType keyboardType;
-  final Widget suffixIcon;
-  final bool obscureText;
-  final TextInputAction textInputAction;
+  final String? hintText;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final Widget? suffixIcon;
+  final bool? obscureText;
+  final TextInputAction? textInputAction;
 
   const TextInput({
-    Key key,
+    Key? key,
     this.hintText,
     this.controller,
     this.keyboardType,
@@ -28,9 +28,10 @@ class TextInput extends StatelessWidget {
         builder: (context, state) {
       var cubit = context.watch<TextInputCubit>();
       return BaseInput(
-        hintText: hintText,
+        key: key ?? Key("Text input"),
+        hintText: hintText ?? "",
         controller: controller,
-        obscureText: obscureText,
+        obscureText: obscureText ?? false,
         suffixIcon: suffixIcon,
         textInputAction: textInputAction,
         keyboardType: keyboardType,

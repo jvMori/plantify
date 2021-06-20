@@ -5,27 +5,30 @@ import 'colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BaseInput extends StatelessWidget {
-  final String hintText;
-  final TextEditingController controller;
-  final Function onChanged;
-  final bool hasError;
-  final String errorText;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final Widget suffixIcon;
-  final TextInputAction textInputAction;
+  final String? hintText;
+  final TextEditingController? controller;
+  final Function (String)? onChanged;
+  final bool? hasError;
+  final String? errorText;
+  final TextInputType? keyboardType;
+  final bool? obscureText;
+  final Widget? suffixIcon;
+  final TextInputAction? textInputAction;
+  final bool? enabled;
 
-  const BaseInput(
-      {Key key,
-      this.hintText,
-      this.controller,
-      this.onChanged,
-      this.hasError,
-      this.errorText,
-      this.keyboardType,
-      this.obscureText,
-      this.suffixIcon, this.textInputAction})
-      : super(key: key);
+  const BaseInput({
+    required Key key,
+    this.hintText,
+    this.controller,
+    this.onChanged,
+    this.hasError,
+    this.errorText,
+    this.keyboardType,
+    this.obscureText,
+    this.suffixIcon,
+    this.textInputAction,
+    this.enabled,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class BaseInput extends StatelessWidget {
       children: [
         TextFormField(
           controller: controller,
+          enabled: enabled,
           onChanged: onChanged,
           obscureText: obscureText ?? false,
           keyboardType: keyboardType ?? TextInputType.text,

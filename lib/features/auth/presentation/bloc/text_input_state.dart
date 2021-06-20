@@ -12,10 +12,10 @@ class TextInputInitial extends TextInputState {
 }
 
 class TextInputError extends TextInputState {
-  final String text;
+  final String? text;
 
   TextInputError(this.text);
 
   @override
-  List<Object> get props => [text];
+  List<Object?> get props => [text];
 }

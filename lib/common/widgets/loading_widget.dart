@@ -4,10 +4,10 @@ import 'package:plantify/common/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoadingWidget extends StatelessWidget {
-  final Color color;
-  final double size;
+  final Color? color;
+  final double? size;
 
-  const LoadingWidget({Key key, this.color, this.size}) : super(key: key);
+  const LoadingWidget({Key? key, this.color, this.size}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

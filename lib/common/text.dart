@@ -6,7 +6,7 @@ import 'colors.dart';
 class BasicText extends StatelessWidget {
   final String text;
 
-  const BasicText({Key key, @required this.text}) : super(key: key);
+  const BasicText({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

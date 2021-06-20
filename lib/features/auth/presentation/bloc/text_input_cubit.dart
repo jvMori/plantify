@@ -7,7 +7,7 @@ part 'text_input_state.dart';
 class TextInputCubit extends Cubit<TextInputState> {
   TextInputCubit(this.nameValidator) : super(TextInputInitial());
   final FieldValidator nameValidator;
-  String _errorText = "";
+  String? _errorText = "";
 
   validate(String value) {
     _errorText = nameValidator.call(value);

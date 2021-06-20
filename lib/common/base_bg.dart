@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'colors.dart';
 
 class BaseBg extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
-  const BaseBg({Key key, this.child}) : super(key: key);
+  const BaseBg({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

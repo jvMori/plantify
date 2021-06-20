@@ -7,12 +7,12 @@ import '../colors.dart';
 
 
 class BasicButton extends StatelessWidget {
-  final Color color;
-  final String text;
-  final Function onClick;
-  final double width;
+  final Color? color;
+  final String? text;
+  final Function ()? onClick;
+  final double? width;
 
-  const BasicButton(this.text, {Key key, this.color, this.onClick, this.width}) : super(key: key);
+  const BasicButton(this.text, {Key? key, this.color, this.onClick, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:plantify/features/auth/presentation/widgets/toggle_password_visi
 class PasswordInput extends StatelessWidget {
   final TextInputAction textInputAction;
 
-  const PasswordInput({Key key, this.textInputAction}) : super(key: key);
+  const PasswordInput({Key? key, required this.textInputAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
