@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:plantify/common/base_input.dart';
-import 'package:plantify/common/colors.dart';
 import 'package:plantify/common/validation/password_validator.dart';
+import 'package:plantify/common/widgets/basic_button.dart';
 import 'package:plantify/features/auth/presentation/bloc/text_input_cubit.dart';
 import 'package:plantify/features/auth/presentation/bloc/toggle_password_visibility_cubit.dart';
 import 'package:plantify/features/auth/presentation/widgets/password_input.dart';
 import 'package:plantify/features/auth/presentation/widgets/text_input.dart';
-import 'package:plantify/features/auth/presentation/widgets/toggle_password_visibility.dart';
 
 class RegisterScreen extends StatelessWidget {
   final textValidator = MultiValidator(
@@ -129,7 +127,14 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 80.h,
+                      height: 30.h,
+                    ),
+                    BasicButton(
+                      "Sign up",
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    SizedBox(
+                      height: 50.h,
                     ),
                   ],
                 ))
