@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:plantify/common/make_toast.dart';
+import 'package:plantify/common/dependencies/dependencies.dart';
 import 'package:plantify/common/validation/password_validator.dart';
 import 'package:plantify/common/widgets/basic_button.dart';
 import 'package:plantify/common/widgets/loading_widget.dart';
+import 'package:plantify/common/widgets/make_toast.dart';
+import 'package:plantify/features/auth/domain/auth_repository.dart';
 import 'package:plantify/features/auth/presentation/bloc/register_screen_cubit.dart';
 import 'package:plantify/features/auth/presentation/bloc/result.dart';
 import 'package:plantify/features/auth/presentation/bloc/text_input_cubit.dart';
@@ -18,7 +20,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => RegisterScreenCubit(),
+      create: (_) => RegisterScreenCubit(getIt<AuthRepository>()),
       child: Register(),
     );
   }
@@ -28,8 +30,7 @@ class Register extends StatelessWidget {
   final textValidator = MultiValidator(
     [
       RequiredValidator(errorText: 'This field is required.'),
-      MinLengthValidator(2,
-          errorText: 'Name must be at least 2 characters long.'),
+      MinLengthValidator(2, errorText: 'Name must be at least 2 characters long.'),
       PatternValidator(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
           errorText: 'Name must contain only alphabetical characters.')
     ],
@@ -100,7 +101,7 @@ class Register extends StatelessWidget {
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 2*30.w,
+                    height: MediaQuery.of(context).size.height - 2 * 30.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.max,

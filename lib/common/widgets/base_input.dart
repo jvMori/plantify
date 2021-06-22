@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../utils/colors.dart';
 
 class BaseInput extends StatelessWidget {
   final String? hintText;
   final TextEditingController? controller;
-  final Function (String)? onChanged;
+  final Function(String)? onChanged;
   final bool? hasError;
   final String? errorText;
   final TextInputType? keyboardType;
@@ -56,23 +56,17 @@ class BaseInput extends StatelessWidget {
             hintStyle: TextStyle(color: _hasError ? Colors.redAccent : gray),
             focusedBorder: OutlineInputBorder(
               gapPadding: 0.0,
-              borderSide: _hasError
-                  ? BorderSide(color: Colors.redAccent)
-                  : BorderSide.none,
+              borderSide: _hasError ? BorderSide(color: Colors.redAccent) : BorderSide.none,
               borderRadius: BorderRadius.circular(5.w),
             ),
             enabledBorder: OutlineInputBorder(
               gapPadding: 0.0,
-              borderSide: _hasError
-                  ? BorderSide(color: Colors.redAccent)
-                  : BorderSide.none,
+              borderSide: _hasError ? BorderSide(color: Colors.redAccent) : BorderSide.none,
               borderRadius: BorderRadius.circular(5.w),
             ),
             border: OutlineInputBorder(
               gapPadding: 0.0,
-              borderSide: _hasError
-                  ? BorderSide(color: Colors.redAccent)
-                  : BorderSide.none,
+              borderSide: _hasError ? BorderSide(color: Colors.redAccent) : BorderSide.none,
               borderRadius: BorderRadius.circular(5.w),
             ),
           ),

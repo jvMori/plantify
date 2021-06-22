@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'colors.dart';
+import '../utils/colors.dart';
 
 class BasicText extends StatelessWidget {
   final String text;

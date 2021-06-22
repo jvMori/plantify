@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'colors.dart';
+import '../utils/colors.dart';
 
 class BaseBg extends StatelessWidget {
   final Widget? child;

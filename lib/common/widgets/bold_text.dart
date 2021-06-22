@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:plantify/common/colors.dart';
+import 'package:plantify/common/utils/colors.dart';
 
 class BoldText extends StatelessWidget {
   final String? text;
@@ -10,11 +10,12 @@ class BoldText extends StatelessWidget {
   final double? letterSpacing;
   final double? fontSize;
 
-  const BoldText(this.text, {Key? key, this.color, this.align, this.fontWeight, this.letterSpacing, this.fontSize}) : super(key: key);
+  const BoldText(this.text, {Key? key, this.color, this.align, this.fontWeight, this.letterSpacing, this.fontSize})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Text(
+    return Text(
       text?.toUpperCase() ?? "",
       textAlign: align,
       style: TextStyle(

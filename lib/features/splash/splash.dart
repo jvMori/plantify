@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plantify/common/base_bg.dart';
-import 'package:plantify/common/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:plantify/common/widgets/base_bg.dart';
 import 'package:plantify/features/auth/presentation/screens/register_screen.dart';
 import 'package:plantify/features/splash/splash_cubit.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Splash extends StatelessWidget {
   @override
@@ -52,7 +51,7 @@ class SplashBody extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: MediaQuery.of(context).size.height/2 - 80.h,
+            top: MediaQuery.of(context).size.height / 2 - 80.h,
             left: 0,
             right: 0,
             child: SizedBox(

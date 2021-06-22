@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:plantify/common/colors.dart';
+import 'package:logger/logger.dart';
+import 'package:plantify/common/utils/colors.dart';
 import 'package:plantify/features/splash/splash.dart';
 
+import 'common/dependencies/dependencies.dart';
+
+final logger = Logger();
+
 void main() {
-  runApp(MyApp());
+  configureDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,8 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(375,812),
-      builder:()=> MaterialApp(
+      designSize: Size(375, 812),
+      builder: () => MaterialApp(
         title: 'Flutter Demo',
         theme: theme,
         home: Splash(),
@@ -21,4 +29,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

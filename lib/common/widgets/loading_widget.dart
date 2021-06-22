@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:plantify/common/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:plantify/common/utils/colors.dart';
 
 class LoadingWidget extends StatelessWidget {
   final Color? color;

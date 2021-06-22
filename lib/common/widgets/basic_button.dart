@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantify/common/widgets/bold_text.dart';
 
-import '../colors.dart';
-
+import '../utils/colors.dart';
 
 class BasicButton extends StatelessWidget {
   final Color? color;
   final String? text;
-  final Function ()? onClick;
+  final Function()? onClick;
   final double? width;
 
   const BasicButton(this.text, {Key? key, this.color, this.onClick, this.width}) : super(key: key);
@@ -35,18 +34,21 @@ class BasicButton extends StatelessWidget {
         child: TextButton(
           onPressed: onClick,
           style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0.w),
-                  side: BorderSide.none,
-                )),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0.w),
+              side: BorderSide.none,
+            )),
             minimumSize: MaterialStateProperty.all(Size(width ?? 550.0.w, 50.0.w)),
             backgroundColor: MaterialStateProperty.all(color ?? accentColor),
           ),
-          child: BoldText(text, color: white, fontSize: 17.sp, letterSpacing: 3.w,),
+          child: BoldText(
+            text,
+            color: white,
+            fontSize: 17.sp,
+            letterSpacing: 3.w,
+          ),
         ),
       ),
     );
   }
 }
-

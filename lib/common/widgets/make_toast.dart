@@ -1,6 +1,6 @@
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:plantify/common/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:plantify/common/utils/colors.dart';
 
 makeToast(String message) {
   Fluttertoast.showToast(
