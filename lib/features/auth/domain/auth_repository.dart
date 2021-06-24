@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:plantify/common/utils/handle_response.dart';
 import 'package:plantify/features/auth/data/auth_api.dart';
 import 'package:plantify/features/auth/data/auth_response.dart';
 import 'package:plantify/features/auth/data/register_data.dart';
@@ -18,11 +19,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Result<AuthEntity>> register(RegisterData registerData) async {
-    try {
-      final AuthResponse result = await apiClient.register(registerData);
-      return Result<AuthEntity>.success(result.mapToEntity());
-    } catch (e) {
-      return Result<AuthEntity>.error("Something went wrong!");
-    }
+    Result<AuthEntity> result = await handleResponse<AuthResponse, AuthEntity>(
+      () => apiClient.register(registerData),
+      (AuthResponse response) => response.mapToEntity(),
+    );
+    return result;
   }
 }

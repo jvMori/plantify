@@ -174,7 +174,7 @@ class Register extends StatelessWidget {
   Widget button(RegisterScreenCubit cubit) => BasicButton(
         "Sign up",
         width: 250.w,
-        onClick: cubit.init,
+        onClick: cubit.signUp,
       );
 
   Widget? signUpButton(Result state, RegisterScreenCubit cubit) {

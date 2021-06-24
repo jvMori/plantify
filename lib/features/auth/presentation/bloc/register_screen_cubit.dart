@@ -10,9 +10,8 @@ class RegisterScreenCubit extends Cubit<Result> {
 
   final AuthRepository repository;
 
-  init() async {
+  signUp() async {
     emit(Result.loading());
-    await Future.delayed(Duration(seconds: 3));
     final result = await repository.register(RegisterData("test@test.com", "Iwona", "Moryc", "Test1234!"));
     emit(result);
   }
