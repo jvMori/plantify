@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:plantify/common/dependencies/dependencies.dart';
-import 'package:plantify/common/validation/password_validator.dart';
+import 'package:plantify/common/validation/validation.dart';
 import 'package:plantify/common/widgets/basic_button.dart';
 import 'package:plantify/common/widgets/loading_widget.dart';
 import 'package:plantify/common/widgets/make_toast.dart';
+import 'package:plantify/features/auth/data/register_data.dart';
 import 'package:plantify/features/auth/domain/auth_repository.dart';
 import 'package:plantify/features/auth/presentation/bloc/register_screen_cubit.dart';
 import 'package:plantify/features/auth/presentation/bloc/result.dart';
@@ -27,22 +27,10 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class Register extends StatelessWidget {
-  final textValidator = MultiValidator(
-    [
-      RequiredValidator(errorText: 'This field is required.'),
-      MinLengthValidator(2, errorText: 'Name must be at least 2 characters long.'),
-      PatternValidator(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-          errorText: 'Name must contain only alphabetical characters.')
-    ],
-  );
-  final emailValidator = MultiValidator(
-    [
-      RequiredValidator(errorText: 'This field is required.'),
-      EmailValidator(errorText: 'Please provide correct email address.')
-    ],
-  );
-
-  final passwordValidator = PasswordValidator();
+  final passwordCubit = TextInputCubit(passwordValidator);
+  final firstNameCubit = TextInputCubit(textValidator);
+  final lastNameCubit = TextInputCubit(textValidator);
+  final emailCubit = TextInputCubit(emailValidator);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +98,7 @@ class Register extends StatelessWidget {
                             child: Column(
                           children: [
                             BlocProvider(
-                              create: (_) => TextInputCubit(textValidator),
+                              create: (_) => firstNameCubit,
                               child: TextInput(
                                 hintText: 'First name',
                               ),
@@ -119,7 +107,7 @@ class Register extends StatelessWidget {
                               height: 20.h,
                             ),
                             BlocProvider(
-                              create: (_) => TextInputCubit(textValidator),
+                              create: (_) => lastNameCubit,
                               child: TextInput(
                                 hintText: 'Last name',
                               ),
@@ -128,7 +116,7 @@ class Register extends StatelessWidget {
                               height: 20.h,
                             ),
                             BlocProvider(
-                              create: (_) => TextInputCubit(emailValidator),
+                              create: (_) => emailCubit,
                               child: TextInput(
                                 hintText: 'Email',
                                 keyboardType: TextInputType.emailAddress,
@@ -140,7 +128,7 @@ class Register extends StatelessWidget {
                             MultiBlocProvider(
                               providers: [
                                 BlocProvider(
-                                  create: (_) => TextInputCubit(passwordValidator),
+                                  create: (_) => passwordCubit,
                                 ),
                                 BlocProvider(
                                   create: (_) => TogglePasswordVisibilityCubit(),
@@ -153,7 +141,12 @@ class Register extends StatelessWidget {
                             SizedBox(
                               height: 40.h,
                             ),
-                            signUpButton(state, cubit) ?? Text(""),
+                            signUpButton(
+                                  state,
+                                  cubit,
+                                  [firstNameCubit, lastNameCubit, emailCubit, passwordCubit],
+                                ) ??
+                                Text(""),
                             SizedBox(
                               height: 40.h,
                             ),
@@ -171,15 +164,25 @@ class Register extends StatelessWidget {
     );
   }
 
-  Widget button(RegisterScreenCubit cubit) => BasicButton(
+  Widget button(RegisterScreenCubit cubit, List<Validation> fields) => BasicButton(
         "Sign up",
         width: 250.w,
-        onClick: cubit.signUp,
+        onClick: () {
+          cubit.signUp(
+            fields,
+            RegisterData(
+              emailCubit.getValue(),
+              firstNameCubit.getValue(),
+              lastNameCubit.getValue(),
+              passwordCubit.getValue(),
+            ),
+          );
+        },
       );
 
-  Widget? signUpButton(Result state, RegisterScreenCubit cubit) {
+  Widget? signUpButton(Result state, RegisterScreenCubit cubit, List<Validation> fields) {
     return state.when(
-      () => button(cubit),
+      () => button(cubit, fields),
       loading: () => SizedBox(
         height: 50.w,
         child: LoadingWidget(
@@ -188,9 +191,9 @@ class Register extends StatelessWidget {
       ),
       error: (message) {
         makeToast(message ?? "Something went wrong");
-        return button(cubit);
+        return button(cubit, fields);
       },
-      success: (data) => button(cubit),
+      success: (data) => button(cubit, fields),
     );
   }
 }

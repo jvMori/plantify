@@ -35,7 +35,7 @@ class TextInput extends StatelessWidget {
         keyboardType: keyboardType,
         hasError: state is TextInputError,
         errorText: state is TextInputError ? state.text : "",
-        onChanged: cubit.validate,
+        onChanged: cubit.onValueChanged,
       );
     });
   }
