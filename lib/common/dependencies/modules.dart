@@ -9,7 +9,10 @@ abstract class RegisterModule {
         connectTimeout: 6000,
       ),
     );
-    instance.interceptors.add(LogInterceptor());
+    instance.interceptors.add(LogInterceptor(
+      requestBody: true,
+      responseBody: true,
+    ));
     return instance;
   }
 }
